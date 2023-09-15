@@ -1,0 +1,15 @@
+{
+  "name": "sw-xml-parser-rs",
+  "version": "0.1.0",
+  "description": "An xml parsing module in Rust for consumption in Node",
+  "main": "index.node",
+  "scripts": {
+    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "test": "cargo test"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.6.1",
+    "cargo-cp-artifact": "^0.1"
+  }
+}
