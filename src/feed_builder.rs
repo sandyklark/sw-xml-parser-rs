@@ -58,6 +58,7 @@ pub mod feed_builder {
         }
     }
 
+    // paraing broken into functions to provide good defaults
     pub fn from(parsed_feed: &model::Feed) -> Feed {
         let feed = Feed {
             id: &parsed_feed.id,
