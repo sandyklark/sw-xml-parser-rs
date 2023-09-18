@@ -19,8 +19,7 @@ fn runtime<'a, C: Context<'a>>(cx: &mut C) -> NeonResult<&'static Runtime> {
 }
 
 // fetch feed
-async fn fetch_feed() -> Result<String, reqwest::Error> {
-    let url: &str = "https://www.githubstatus.com/history.atom";
+async fn fetch_feed(url: &str) -> Result<String, reqwest::Error> {
     let client = Client::new();
     client.get(url)
         .header("Accept", "text/plain,application/xml")
@@ -35,13 +34,15 @@ async fn fetch_feed() -> Result<String, reqwest::Error> {
 // convert types into node types and "Send" promise to node event-loop thread with deferred
 fn from_url(mut cx: FunctionContext) -> JsResult<JsPromise> {
 
+    let url_handle = cx.argument::<JsString>(0)?;
+    let url = url_handle.value(&mut cx);
     let rt = runtime(&mut cx)?;
     let channel = cx.channel();
     let (deferred, promise) = cx.promise();
 
     rt.spawn(async move {
 
-        let fetch_result = fetch_feed().await;
+        let fetch_result = fetch_feed(&url).await;
 
         match fetch_result {
 

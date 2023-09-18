@@ -2,6 +2,7 @@
 const {fromUrl} = require('../index');
 
 (async () => {
-  let res = await fromUrl();
+  let url = 'https://www.githubstatus.com/history.atom';
+  let res = await fromUrl(url);
   console.log(res);
 })();
