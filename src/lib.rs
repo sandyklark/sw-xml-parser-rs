@@ -8,7 +8,7 @@ use tokio::runtime::Runtime;
 
 // import feed builder / manual serializer
 mod feed_builder;
-use crate::feed_builder::feed_builder::{from};
+use feed_builder::{from};
 
 // Return a global tokio runtime or create one if it doesn't exist.
 // Throws a JavaScript exception if the `Runtime` fails to create.
